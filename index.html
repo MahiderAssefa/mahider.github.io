@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mahider Assefa | Portfolio</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+        
+            --bg-dark: #070a13; 
+            --bg-surface: #0f1626;
+            --card-bg: rgba(15, 22, 38, 0.7);
+            --primary: #ff007f; /* Neon Pink */
+            --secondary: #00f0ff; /* Electric Cyan */
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --border-glow: rgba(255, 0, 127, 0.35);
+            --secondary-glow: rgba(0, 240, 255, 0.35);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--bg-dark);
+            background-image: 
+                radial-gradient(at 0% 100%, rgba(255, 0, 127, 0.12) 0px, transparent 40%),
+                radial-gradient(at 100% 0%, rgba(0, 240, 255, 0.12) 0px, transparent 40%);
+            background-attachment: fixed;
+            color: var(--text-main);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+     
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 10%;
+            position: sticky;
+            top: 0;
+            background: rgba(7, 10, 19, 0.8);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid rgba(255, 0, 127, 0.15);
+            z-index: 100;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+            order: 1; 
+        }
+
+        nav h1 {
+            font-size: 1.4rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -0.5px;
+            order: 2; 
+        }
+
+        nav a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 500;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+       
+        nav a::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            transform: scaleX(0);
+            height: 2px;
+            bottom: -4px;
+            left: 0;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            transform-origin: bottom right;
+            transition: transform 0.25s ease-out;
+        }
+
+        nav a:hover {
+            color: var(--text-main);
+        }
+
+        nav a:hover::after {
+            transform: scaleX(1);
+            transform-origin: bottom left;
+        }
+
+       
+        section {
+            padding: 100px 10%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            letter-spacing: -1px;
+            color: var(--text-main);
+        }
+
+        .section-title span {
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: var(--text-muted);
+            margin-bottom: 60px;
+            font-size: 1rem;
+        }
+
+       
+        .hero {
+            min-height: calc(100vh - 80px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding-top: 40px;
+        }
+
+     
+        .hero-content .photo-container {
+            position: relative;
+            width: 180px;
+            height: 180px;
+            margin: 0 auto 30px auto;
+            border-radius: 50%;
+            padding: 6px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            box-shadow: 0 0 25px var(--border-glow);
+            transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease;
+        }
+
+      
+        .hero-content .photo-container:hover {
+            transform: scale(1.08) rotate(5deg);
+            box-shadow: 0 0 40px var(--border-glow), 0 0 25px var(--secondary-glow);
+        }
+
+        .hero-content .profile-photo {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            background: var(--bg-surface);
+            display: block;
+            border: 4px solid var(--bg-dark);
+        }
+
+        .hero h2 {
+            font-size: 4rem;
+            font-weight: 800;
+            letter-spacing: -2px;
+            margin-bottom: 20px;
+            line-height: 1.1;
+        }
+
+        .hero h2 span {
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            max-width: 600px;
+            margin: 0 auto 40px auto;
+            color: var(--text-muted);
+            font-size: 1.2rem;
+            font-weight: 400;
+        }
+
+     
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            padding: 14px 34px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: var(--bg-dark);
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.95rem;
+            letter-spacing: 0.5px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 4px 20px var(--border-glow);
+        }
+
+        .btn:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 35px rgba(0, 240, 255, 0.5);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--text-main);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 9px 20px;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--secondary);
+            color: var(--bg-dark);
+            background: var(--secondary);
+            box-shadow: 0 0 20px var(--secondary-glow);
+        }
+
+        /* About Section Box */
+        .about-box {
+            background: var(--card-bg);
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            backdrop-filter: blur(8px);
+            padding: 45px;
+            border-radius: 24px;
+            max-width: 850px;
+            margin: 0 auto;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+            transition: border-color 0.3s ease, transform 0.3s ease;
+        }
+
+        .about-box:hover {
+            border-color: rgba(255, 0, 127, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .about-box p {
+            color: var(--text-main);
+            font-size: 1.1rem;
+            margin-bottom: 22px;
+            opacity: 0.95;
+        }
+
+        .about-box p:last-child {
+            margin-bottom: 0;
+        }
+
+        /* Interactive Grid Skills */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .skill-card {
+            background: var(--card-bg);
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            padding: 25px;
+            border-radius: 16px;
+            text-align: center;
+            font-weight: 700;
+            font-size: 1.05rem;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* Shifting glow systems when individual cards are focused/hovered */
+        .skill-card:hover {
+            border-color: var(--secondary);
+            transform: translateY(-6px) scale(1.02);
+            box-shadow: 0 12px 25px var(--secondary-glow);
+            color: var(--secondary);
+        }
+
+        .skill-card:nth-child(even):hover {
+            border-color: var(--primary);
+            box-shadow: 0 12px 25px var(--border-glow);
+            color: var(--primary);
+        }
+
+        /* Projects Section */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+        }
+
+        .project-card {
+            background: var(--card-bg);
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            border-radius: 20px;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--primary);
+            box-shadow: 0 20px 40px rgba(255, 0, 127, 0.2);
+        }
+
+        .project-img-wrapper {
+            position: relative;
+            overflow: hidden;
+            padding-top: 56.25%;
+        }
+
+        .project-card img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+
+        .project-card:hover img {
+            transform: scale(1.08);
+        }
+
+        .project-content {
+            padding: 25px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .project-content h3 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: var(--text-main);
+            transition: color 0.3s ease;
+        }
+
+        .project-card:hover .project-content h3 {
+            color: var(--primary);
+        }
+
+        .project-content p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin-bottom: 25px;
+            flex-grow: 1;
+        }
+
+        .project-actions {
+            display: flex;
+            gap: 12px;
+        }
+
+        /* Contact Section */
+        .contact-box {
+            max-width: 500px;
+            margin: 0 auto;
+            text-align: center;
+            background: var(--card-bg);
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            padding: 40px;
+            border-radius: 24px;
+            transition: border-color 0.3s ease;
+        }
+
+        .contact-box:hover {
+            border-color: var(--secondary);
+        }
+
+        .contact-info {
+            margin-bottom: 30px;
+        }
+
+        .contact-info p {
+            font-size: 1.1rem;
+            margin: 10px 0;
+        }
+
+        .contact-info span {
+            color: var(--secondary);
+            font-weight: 600;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.04);
+            background: rgba(7, 10, 19, 0.7);
+        }
+
+        @media(max-width: 768px) {
+            nav {
+                padding: 20px 5%;
+                flex-direction: column;
+                gap: 15px;
+            }
+            nav ul {
+                order: 2;
+            }
+            nav h1 {
+                order: 1;
+            }
+            section {
+                padding: 60px 5%;
+            }
+            .hero h2 {
+                font-size: 2.8rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav>
+        <ul>
+            <li><a href="#about">About</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+        <h1>Mahider Assefa</h1>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-content">
+            <div class="photo-container">
+                <img src="image_3.png" alt="Mahider Assefa" class="profile-photo">
+            </div>
+            <h2>Hello, I'm <span>Mahider Assefa</span></h2>
+            <p>
+                3rd Year Computer Science Student at Infolink University focused on software engineering and digital audio signal processing.
+            </p>
+            <a href="#projects" class="btn">View My Work</a>
+        </div>
+    </section>
+
+    <section id="about">
+        <h2 class="section-title">About <span>Me</span></h2>
+        <p class="section-subtitle">Academic background and development focus</p>
+
+        <div class="about-box">
+            <p>
+                I am a 3rd Year Computer Science student at <strong>Infolink University</strong>. My educational journey involves diving deep into foundational programming concepts and exploring system structures.
+            </p>
+            <p>
+                I enjoy building efficient desktop applications, working on custom logic scripts, and designing responsive front-end layouts using a varied digital toolkit.
+            </p>
+        </div>
+    </section>
+
+    <section id="skills">
+        <h2 class="section-title">Technical <span>Competence</span></h2>
+        <p class="section-subtitle">Languages and technologies I work with</p>
+
+        <div class="skills-grid">
+            <div class="skill-card">C++ Development</div>
+            <div class="skill-card">C# Programming</div>
+            <div class="skill-card">Java Core Architectures</div>
+            <div class="skill-card">HTML5 Structures</div>
+            <div class="skill-card">Custom CSS3 Systems</div>
+            <div class="skill-card">Object-Oriented Logic</div>
+        </div>
+    </section>
+
+    <section id="projects">
+        <h2 class="section-title">Featured <span>Projects</span></h2>
+        <p class="section-subtitle">Applications and audio plugins engineered during my studies</p>
+
+        <div class="projects-grid">
+
+            <div class="project-card">
+                <div class="project-img-wrapper">
+                    <img src="https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?q=80&w=1200&auto=format&fit=crop" alt="Audio Mixer Knobs">
+                </div>
+                <div class="project-content">
+                    <h3>Gain Staging Plugin</h3>
+                    <p>
+                        An audio utility plugin designed to optimize input levels, managing peak headers and internal dynamic ranges before processing blocks.
+                    </p>
+                    <div class="project-actions">
+                        <a href="#" class="btn-secondary">Live App</a>
+                        <a href="#" class="btn-secondary">Code Repository</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-img-wrapper">
+                    <img src="https://images.unsplash.com/photo-1514525253161-7a46d19cd819?q=80&w=1200&auto=format&fit=crop" alt="Sound wave visualization">
+                </div>
+                <div class="project-content">
+                    <h3>Audio Delay Plugin</h3>
+                    <p>
+                        A real-time audio processing plugin utilizing feedback buffers to generate echoing delay taps and ambient acoustic modulations.
+                    </p>
+                    <div class="project-actions">
+                        <a href="#" class="btn-secondary">Live App</a>
+                        <a href="#" class="btn-secondary">Code Repository</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-img-wrapper">
+                    <img src="https://images.unsplash.com/photo-1618477388954-7852f32655ec?q=80&w=1200&auto=format&fit=crop" alt="Interface Logic Code">
+                </div>
+                <div class="project-content">
+                    <h3>Logic Calculator</h3>
+                    <p>
+                        An explicit numerical evaluation engine built to accurately handle math processing logic, operator weight sorting, and UI states.
+                    </p>
+                    <div class="project-actions">
+                        <a href="#" class="btn-secondary">Live App</a>
+                        <a href="#" class="btn-secondary">Code Repository</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <section id="contact">
+        <h2 class="section-title">Get In <span>Touch</span></h2>
+        <p class="section-subtitle">Reach out for code collaborations, plugin feedback, or opportunities</p>
+
+        <div class="contact-box">
+            <div class="contact-info">
+                <p><span>Email:</span> mahiderfekadu@gmail.com</p>
+                <p><span>Location:</span> Awasa, Ethiopia</p>
+            </div>
+            <div class="social-links">
+                <a href="https://github.com/" class="btn-secondary">GitHub Workspace</a>
+                <a href="https://linkedin.com/" class="btn-secondary">LinkedIn Profile</a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>© 2026 Mahider Assefa. .</p>
+    </footer>
+
+</body>
+
+</html>

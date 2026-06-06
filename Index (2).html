@@ -1,0 +1,811 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mahider Assefa</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #0d0800;
+            color: #f8fafc;
+            overflow-x: hidden;
+        }
+        html {
+            scroll-behavior: smooth;
+        }
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #0d0800;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(to bottom, #ff6b35, #ffcc00);
+            border-radius: 3px;
+        }
+
+        .text-gradient {
+            background: linear-gradient(to right, #ff6b35, #ffcc00);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 50;
+            transition: all 0.5s ease;
+        }
+
+            nav.scrolled {
+                background: rgba(13, 8, 0, 0.92);
+                backdrop-filter: blur(12px);
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+                border-bottom: 1px solid rgba(255, 107, 53, 0.12);
+            }
+
+        .nav-content {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 1.25rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-link {
+            position: relative;
+            color: #94a3b8;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+            .nav-link::after {
+                content: '';
+                position: absolute;
+                width: 100%;
+                height: 2px;
+                bottom: -5px;
+                left: 0;
+                background: linear-gradient(to right, #ff6b35, #ffcc00);
+                transform: scaleX(0);
+                transition: transform 0.3s ease;
+            }
+
+            .nav-link:hover {
+                color: #f8fafc;
+            }
+
+                .nav-link:hover::after {
+                    transform: scaleX(1);
+                }
+
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 6rem 1.5rem 4rem;
+            position: relative;
+        }
+
+        .ambient-orb {
+            position: absolute;
+            border-radius: 50%;
+            pointer-events: none;
+            filter: blur(40px);
+        }
+
+        .ambient-orb-1 {
+            top: 25%;
+            left: 25%;
+            width: 24rem;
+            height: 24rem;
+            background: radial-gradient(circle, rgba(255, 107, 53, 0.08), transparent 70%);
+        }
+
+        .ambient-orb-2 {
+            bottom: 25%;
+            right: 25%;
+            width: 24rem;
+            height: 24rem;
+            background: radial-gradient(circle, rgba(255, 204, 0, 0.08), transparent 70%);
+        }
+
+        .avatar {
+            width: 11rem;
+            height: 11rem;
+            margin-bottom: 2rem;
+        }
+
+        .avatar-ring {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            padding: 5px;
+            background: linear-gradient(135deg, #ff6b35, #ffcc00);
+            box-shadow: 0 0 30px rgba(255, 107, 53, 0.4), 0 0 60px rgba(255, 204, 0, 0.2);
+        }
+
+        .avatar-img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid #0d0800;
+        }
+
+        .hero h1 {
+            font-weight: 800;
+            margin-bottom: 1.25rem;
+            line-height: 1.2;
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+        }
+
+        .hero-subtitle {
+            max-width: 42rem;
+            margin: 0 auto 2.5rem;
+            color: #94a3b8;
+            font-size: 1.125rem;
+            line-height: 1.6;
+        }
+
+            .hero-subtitle strong {
+                color: #f8fafc;
+            }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 28px;
+            border-radius: 8px;
+            font-weight: 600;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 1px solid transparent;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #ff6b35, #ffcc00);
+            color: #0d0800;
+            box-shadow: 0 4px 20px rgba(255, 107, 53, 0.35);
+        }
+
+            .btn-primary:hover {
+                transform: translateY(-4px);
+                box-shadow: 0 12px 36px rgba(255, 204, 0, 0.45);
+            }
+
+        .btn-outline {
+            background: transparent;
+            color: #f8fafc;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+            .btn-outline:hover {
+                border-color: #ffcc00;
+                background: #ffcc00;
+                color: #0d0800;
+                box-shadow: 0 0 20px rgba(255, 204, 0, 0.35);
+            }
+
+        section {
+            padding: 7rem 1.5rem;
+        }
+
+        .section-max {
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: 2.25rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: #94a3b8;
+            margin-bottom: 1rem;
+        }
+
+        .section-divider {
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(to right, #ff6b35, #ffcc00);
+            border-radius: 2px;
+            margin: 0 auto 3rem;
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.7s ease, transform 0.7s ease;
+        }
+
+            .reveal.visible {
+                opacity: 1;
+                transform: translateY(0);
+            }
+
+        .card {
+            background: rgba(15, 22, 38, 0.65);
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            backdrop-filter: blur(10px);
+            border-radius: 1.5rem;
+            padding: 2.5rem;
+            transition: transform 0.4s ease;
+        }
+
+            .card:hover {
+                transform: translateY(-8px);
+                border-color: rgba(255, 107, 53, 0.5);
+                box-shadow: 0 24px 48px rgba(255, 107, 53, 0.15);
+            }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 1.25rem;
+            max-width: 48rem;
+            margin: 0 auto;
+        }
+
+        .skill-tag {
+            background: rgba(15, 22, 38, 0.7);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            padding: 20px 24px;
+            text-align: center;
+            font-weight: 700;
+            transition: all 0.35s ease;
+        }
+
+            .skill-tag:hover {
+                transform: translateY(-6px) scale(1.03);
+                border-color: #ffcc00;
+                box-shadow: 0 12px 30px rgba(255, 204, 0, 0.2);
+                color: #ffcc00;
+            }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .project-card {
+            background: rgba(15, 22, 38, 0.7);
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            border-radius: 1rem;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.4s ease;
+        }
+
+            .project-card:hover {
+                transform: translateY(-4px);
+            }
+
+        .project-image-wrapper {
+            position: relative;
+            padding-top: 56.25%;
+            overflow: hidden;
+        }
+
+        .project-image {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+
+        .project-card:hover .project-image {
+            transform: scale(1.08);
+        }
+
+        .project-content {
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+            padding: 1.5rem;
+        }
+
+        .project-title {
+            font-weight: 700;
+            font-size: 1.125rem;
+            color: #f8fafc;
+            margin-bottom: 0.75rem;
+        }
+
+        .project-desc {
+            color: #94a3b8;
+            font-size: 0.875rem;
+            line-height: 1.6;
+            flex-grow: 1;
+            margin-bottom: 1rem;
+        }
+
+        .project-links {
+            display: flex;
+            gap: 0.75rem;
+        }
+
+        .btn-sm {
+            padding: 0.5rem 1rem;
+            font-size: 0.75rem;
+        }
+
+        .contact-card {
+            max-width: 32rem;
+            margin: 0 auto;
+        }
+
+        .contact-details {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .contact-detail {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+            color: #f8fafc;
+            font-weight: 500;
+        }
+
+            .contact-detail svg {
+                width: 18px;
+                height: 18px;
+            }
+
+        .divider {
+            width: 100%;
+            height: 1px;
+            background: rgba(255, 255, 255, 0.06);
+            margin: 2rem 0;
+        }
+
+        .contact-links {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+        }
+
+        /* ── Social icon buttons ── */
+        .btn-icon {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 22px;
+            border-radius: 8px;
+            font-weight: 600;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255,255,255,0.1);
+            background: transparent;
+            color: #f8fafc;
+        }
+        .btn-icon svg { width: 22px; height: 22px; flex-shrink: 0; }
+        .btn-icon:hover { border-color: #ffcc00; background: rgba(0,212,255,0.08); transform: translateY(-3px); }
+
+        /* ── About interactive tabs ── */
+        .about-tabs {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+        .about-tab {
+            padding: 8px 20px;
+            border-radius: 999px;
+            border: 1px solid rgba(255,255,255,0.08);
+            background: transparent;
+            color: #94a3b8;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 0.875rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .about-tab.active, .about-tab:hover {
+            background: linear-gradient(135deg, #ff6b35, #ffcc00);
+            color: #0d0800;
+            border-color: transparent;
+        }
+        .about-panel { display: none; animation: fadeIn 0.4s ease; }
+        .about-panel.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+
+        .about-facts {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 1rem;
+            margin-top: 1.25rem;
+        }
+        .about-fact {
+            background: rgba(255,107,53,0.06);
+            border: 1px solid rgba(255,107,53,0.15);
+            border-radius: 12px;
+            padding: 1.25rem;
+            text-align: center;
+        }
+        .about-fact .fact-num {
+            font-size: 1.75rem;
+            font-weight: 800;
+            background: linear-gradient(to right, #ff6b35, #ffcc00);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .about-fact .fact-label { font-size: 0.8rem; color: #94a3b8; margin-top: 4px; }
+
+        .about-interest-list { list-style: none; display: flex; flex-direction: column; gap: 0.75rem; margin-top: 1rem; }
+        .about-interest-list li {
+            display: flex; align-items: center; gap: 10px;
+            color: #e2e8f0; font-size: 0.95rem;
+        }
+        .about-interest-list li::before {
+            content: '';
+            width: 8px; height: 8px; border-radius: 50%;
+            background: linear-gradient(135deg,#ff6b35,#ffcc00);
+            flex-shrink: 0;
+        }
+
+        /* ── Tools section ── */
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1.5rem;
+            max-width: 56rem;
+            margin: 0 auto;
+        }
+        .tool-card {
+            background: rgba(15,22,38,0.7);
+            border: 1px solid rgba(255,255,255,0.05);
+            border-radius: 1rem;
+            padding: 1.75rem;
+            text-align: center;
+            transition: all 0.35s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .tool-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(255,107,53,0.05), rgba(255,204,0,0.05));
+            opacity: 0;
+            transition: opacity 0.35s ease;
+        }
+        .tool-card:hover { transform: translateY(-6px); border-color: rgba(0,212,255,0.4); box-shadow: 0 16px 40px rgba(255,204,0,0.12); }
+        .tool-card:hover::before { opacity: 1; }
+        .tool-logo { width: 56px; height: 56px; margin: 0 auto 1rem; display: flex; align-items: center; justify-content: center; }
+        .tool-logo img { width: 100%; height: 100%; object-fit: contain; }
+        .tool-name { font-weight: 700; font-size: 1rem; color: #f8fafc; margin-bottom: 0.4rem; }
+        .tool-desc { font-size: 0.8rem; color: #94a3b8; line-height: 1.5; }
+
+        footer {
+            text-align: center;
+            padding: 2.5rem 1.5rem;
+            color: #475569;
+            font-size: 0.875rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.04);
+            background: rgba(13, 8, 0, 0.7);
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                gap: 1rem;
+                font-size: 0.875rem;
+            }
+
+            section {
+                padding: 3.5rem 1rem;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav id="navbar">
+        <div class="nav-content">
+            <ul class="nav-links">
+                <li><a href="#about" class="nav-link">About</a></li>
+                <li><a href="#skills" class="nav-link">Skills</a></li>
+                <li><a href="#projects" class="nav-link">Projects</a></li>
+                <li><a href="#tools" class="nav-link">Tools</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
+            </ul>
+            <span class="text-gradient" style="font-weight: 700;">Mahider Assefa</span>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="ambient-orb ambient-orb-1"></div>
+        <div class="ambient-orb ambient-orb-2"></div>
+        <div class="avatar">
+            <div class="avatar-ring">
+                <img src="q.jpg" alt="Mahider Assefa" class="avatar-img">
+            </div>
+        </div>
+        <h1>Hello, I'm <span class="text-gradient">Mahider Assefa</span></h1>
+        <p class="hero-subtitle">3rd Year Computer Science Student at <strong>Infolink University</strong> focused on software engineering and digital audio processing.</p>
+        <div class="hero-buttons">
+            <a href="#projects" class="btn btn-primary">View My Work</a>
+            <a href="#contact" class="btn btn-outline">Get In Touch</a>
+        </div>
+    </section>
+
+    <section id="about">
+        <div class="section-max">
+            <h2 class="section-title reveal">About <span class="text-gradient">Me</span></h2>
+            <p class="section-subtitle reveal">Academic background and development focus</p>
+            <div class="section-divider reveal"></div>
+            <div class="card reveal">
+                <div class="about-tabs">
+                    <button class="about-tab active" onclick="switchTab('story')">My Story</button>
+                    <button class="about-tab" onclick="switchTab('stats')">At a Glance</button>
+                    <button class="about-tab" onclick="switchTab('interests')">Interests</button>
+                </div>
+
+                <div id="tab-story" class="about-panel active">
+                    <p style="color:#e2e8f0;font-size:1.05rem;line-height:1.7;margin-bottom:1.25rem;">
+                        I am a 3rd Year Computer Science student at <strong style="color:#f8fafc;">Infolink University</strong>.
+                        My educational journey involves diving deep into foundational programming concepts and exploring system structures.
+                    </p>
+                    <p style="color:#e2e8f0;font-size:1.05rem;line-height:1.7;">
+                        I enjoy building efficient desktop applications, working on custom logic scripts, and designing responsive front-end layouts using a varied digital toolkit. I'm particularly drawn to the intersection of software and sound — where code meets creativity.
+                    </p>
+                </div>
+
+                <div id="tab-stats" class="about-panel">
+                    <div class="about-facts">
+                        <div class="about-fact">
+                            <div class="fact-num">3rd</div>
+                            <div class="fact-label">Year of CS Study</div>
+                        </div>
+                        <div class="about-fact">
+                            <div class="fact-num">3+</div>
+                            <div class="fact-label">Projects Built</div>
+                        </div>
+                        <div class="about-fact">
+                            <div class="fact-num">6+</div>
+                            <div class="fact-label">Languages & Tools</div>
+                        </div>
+                        <div class="about-fact">
+                            <div class="fact-num">2</div>
+                            <div class="fact-label">Audio Plugins Shipped</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="tab-interests" class="about-panel">
+                    <ul class="about-interest-list">
+                        <li>Digital Audio Processing &amp; Plugin Development</li>
+                        <li>Desktop Application Engineering</li>
+                        <li>Responsive Front-End Design</li>
+                        <li>Object-Oriented Architecture</li>
+                        <li>Music Production &amp; Sound Design</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="skills">
+        <div class="section-max">
+            <h2 class="section-title reveal">Technical <span class="text-gradient">Competence</span></h2>
+            <p class="section-subtitle reveal">Languages and technologies I work with</p>
+            <div class="section-divider reveal"></div>
+            <div class="skills-grid reveal">
+                <div class="skill-tag">C++ Development</div>
+                <div class="skill-tag">C# Programming</div>
+                <div class="skill-tag">Java Core Architectures</div>
+                <div class="skill-tag">HTML5 Structures</div>
+                <div class="skill-tag">Custom CSS3 Systems</div>
+                <div class="skill-tag">Object-Oriented Logic</div>
+            </div>
+        </div>
+    </section>
+
+    <section id="tools">
+        <div class="section-max">
+            <h2 class="section-title reveal">Frameworks &amp; <span class="text-gradient">Tools</span></h2>
+            <p class="section-subtitle reveal">The ecosystems and frameworks powering my work</p>
+            <div class="section-divider reveal"></div>
+            <div class="tools-grid">
+                <div class="tool-card reveal">
+                    <div class="tool-logo">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/JUCE_Logo.png/240px-JUCE_Logo.png" alt="JUCE" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+                        <div style="display:none;width:100%;height:100%;align-items:center;justify-content:center;font-size:1.6rem;font-weight:800;background:linear-gradient(135deg,#ff6b35,#ffcc00);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">J</div>
+                    </div>
+                    <div class="tool-name">JUCE Framework</div>
+                    <div class="tool-desc">C++ framework for building cross-platform audio plugins and applications — powering my gain staging and delay plugins.</div>
+                </div>
+                <div class="tool-card reveal">
+                    <div class="tool-logo">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/ee/.NET_Core_Logo.svg/240px-.NET_Core_Logo.svg.png" alt="ASP.NET" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+                        <div style="display:none;width:100%;height:100%;align-items:center;justify-content:center;font-size:1.6rem;font-weight:800;background:linear-gradient(135deg,#ff6b35,#ffcc00);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">.N</div>
+                    </div>
+                    <div class="tool-name">ASP.NET Framework</div>
+                    <div class="tool-desc">Microsoft's powerful web framework for building robust server-side applications and APIs using C#.</div>
+                </div>
+                <div class="tool-card reveal">
+                    <div class="tool-logo" style="font-size:2.4rem;display:flex;align-items:center;justify-content:center;">⚙️</div>
+                    <div class="tool-name">C++ / C#</div>
+                    <div class="tool-desc">Core languages for performance-critical audio processing and cross-platform desktop development.</div>
+                </div>
+                <div class="tool-card reveal">
+                    <div class="tool-logo" style="font-size:2.4rem;display:flex;align-items:center;justify-content:center;">🌐</div>
+                    <div class="tool-name">HTML5 &amp; CSS3</div>
+                    <div class="tool-desc">Front-end foundations for building responsive, visually polished web interfaces and layouts.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects">
+        <div class="section-max">
+            <h2 class="section-title reveal">Featured <span class="text-gradient">Projects</span></h2>
+            <p class="section-subtitle reveal">Applications and audio plugins engineered during my studies</p>
+            <div class="section-divider reveal"></div>
+            <div class="projects-grid">
+                <article class="project-card reveal">
+                    <div class="project-image-wrapper">
+                        <img src="https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?q=80&w=1200&auto=format&fit=crop" alt="Audio Mixer" class="project-image">
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">Gain Staging Plugin</h3>
+                        <p class="project-desc">An audio utility plugin designed to optimize input levels, managing peak headers and internal dynamic ranges before processing blocks.</p>
+                        <div class="project-links">
+                            <a href="#" class="btn btn-outline btn-sm">Live App</a>
+                            <a href="#" class="btn btn-outline btn-sm">Code Repo</a>
+                        </div>
+                    </div>
+                </article>
+                <article class="project-card reveal">
+                    <div class="project-image-wrapper">
+                        <img src="https://images.unsplash.com/photo-1514525253161-7a46d19cd819?q=80&w=1200&auto=format&fit=crop" alt="Sound wave" class="project-image">
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">Audio Delay Plugin</h3>
+                        <p class="project-desc">A real-time audio processing plugin utilizing feedback buffers to generate echoing delay taps and ambient acoustic modulations.</p>
+                        <div class="project-links">
+                            <a href="#" class="btn btn-outline btn-sm">Live App</a>
+                            <a href="#" class="btn btn-outline btn-sm">Code Repo</a>
+                        </div>
+                    </div>
+                </article>
+                <article class="project-card reveal">
+                    <div class="project-image-wrapper">
+                        <img src="https://images.unsplash.com/photo-1618477388954-7852f32655ec?q=80&w=1200&auto=format&fit=crop" alt="Logic Code" class="project-image">
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">Logic Calculator</h3>
+                        <p class="project-desc">An explicit numerical evaluation engine built to accurately handle math processing logic, operator weight sorting, and UI states.</p>
+                        <div class="project-links">
+                            <a href="#" class="btn btn-outline btn-sm">Live App</a>
+                            <a href="#" class="btn btn-outline btn-sm">Code Repo</a>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact">
+        <div class="section-max">
+            <h2 class="section-title reveal">Get In <span class="text-gradient">Touch</span></h2>
+            <p class="section-subtitle reveal">Reach out for collaborations, plugin feedback, or opportunities</p>
+            <div class="section-divider reveal"></div>
+            <div class="card contact-card reveal">
+                <div class="contact-details">
+                    <div class="contact-detail">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="#ffcc00" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2" /><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" /></svg>
+                        <span>mahiderfekadu00@gmail.com</span>
+                    </div>
+                    <div class="contact-detail">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="#ffcc00" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2" /><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" /></svg>
+                        <span>Phone Number: +251721128778</span>
+                    </div>
+                    </div>
+                    <div class="contact-detail">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="#ff6b35" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" /><circle cx="12" cy="10" r="3" /></svg>
+                        <span>Hawassa, Ethiopia</span>
+                    </div>
+
+                </div>
+                <div class="divider"></div>
+                <div class="contact-links">
+                    <a href="https://github.com/MahiderAssefa/mahider.github.io" class="btn-icon" target="_blank" rel="noreferrer">
+                        <!-- GitHub logo -->
+                        <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.009-.868-.013-1.703-2.782.604-3.369-1.34-3.369-1.34-.454-1.154-1.11-1.462-1.11-1.462-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.564 9.564 0 0 1 12 6.844a9.59 9.59 0 0 1 2.504.337c1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.744 0 .267.18.579.688.481C19.138 20.163 22 16.418 22 12c0-5.523-4.477-10-10-10z"/></svg>
+                        GitHub
+                    </a>
+                    <a href="https://www.linkedin.com/in/mahider-assefa-1a8b16358" class="btn-icon" target="_blank" rel="noreferrer">
+                        <!-- LinkedIn logo -->
+                        <svg viewBox="0 0 24 24" fill="#ff6b35" xmlns="http://www.w3.org/2000/svg"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                        LinkedIn
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 <span class="text-gradient">Mahider Assefa</span>. All rights reserved.</p>
+    </footer>
+
+    <script>
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => navbar.classList.toggle('scrolled', window.scrollY > 40));
+
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(e => e.isIntersecting && e.target.classList.add('visible'));
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    function switchTab(name) {
+        document.querySelectorAll('.about-tab').forEach((btn, i) => {
+            const panels = ['story','stats','interests'];
+            btn.classList.toggle('active', panels[i] === name);
+        });
+        document.querySelectorAll('.about-panel').forEach(p => p.classList.remove('active'));
+        document.getElementById('tab-' + name).classList.add('active');
+    }
+    </script>
+</body>
+</html>
